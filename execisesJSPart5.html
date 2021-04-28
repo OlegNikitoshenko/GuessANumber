@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>практикаjs_раздел_3</title>
+</head>
+<body>
+	<style>
+		body, input, button {
+			font-family: Arial;
+			color: aliceblue;
+			background-color: black;
+		}
+		.container {
+			max-width: 500px;
+			margin: 40px auto;
+			padding: 20px;
+			background-color: rgba(216, 223, 215, 0.445);
+			border: 1px solid white;
+		}
+		h2	{
+			margin-bottom: 40px;
+		}
+		input {
+			display: block;
+			padding: 5px;
+		}
+		button {
+			margin: 10px 0;
+			padding: 10px;
+			max-width: 100px;
+		}
+		li {
+			list-style: none;
+			line-height: 125%;
+		}
+		.flex-cont {
+			display: flex;
+		}
+		.ch-b {
+			display: inline;
+		}
+		label {
+			margin: 15px 10px;
+			display: block;
+			font-size: 12px;
+			line-height: 150%;
+		}
+	</style>
+
+	<h1>Раздел 5</h1>
+	<div class="task-1 container">
+		<h2>Угадай число</h2>
+			
+	</div>
+	<script defer>
+		//_______________________________сброс инпута_________________________________________
+		function resetInput(input) {
+			input.addEventListener('focus', () => {
+				input.value = '';
+			})
+		}
+		//___________________________удаление результатов___________________________________
+		function deleteResults(input, results) {
+			input.addEventListener('focus', () => {
+				results.innerHTML = '';
+			})
+		}
+		//_____________________________вывести результат_______________________________________________
+		const writeResult = (el, parent, content) => {
+			const elem = document.createElement(el);
+			elem.innerHTML = content;
+			parent.appendChild(elem);
+		}
+	</script>
+	
+</body>
+</html>

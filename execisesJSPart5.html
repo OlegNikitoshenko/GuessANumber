@@ -14,6 +14,7 @@
 			background-color: black;
 		}
 		.container {
+			position: relative;
 			max-width: 500px;
 			margin: 40px auto;
 			padding: 20px;
@@ -23,37 +24,74 @@
 		h2	{
 			margin-bottom: 40px;
 		}
-		input {
-			display: block;
-			padding: 5px;
-		}
+		
 		button {
-			margin: 10px 0;
+			display: block;
+			margin: 5px;
 			padding: 10px;
 			max-width: 100px;
+			box-sizing: border-box;
 		}
 		li {
 			list-style: none;
 			line-height: 125%;
 		}
-		.flex-cont {
+		.input {
+			display: block;
+			padding: 10px;
+			margin: 5px;
+		}
+		.game {
 			display: flex;
 		}
-		.ch-b {
-			display: inline;
-		}
-		label {
-			margin: 15px 10px;
+		.admit  {
 			display: block;
-			font-size: 12px;
-			line-height: 150%;
 		}
+		.result {
+			position: absolute;
+			z-index: 10;
+			display: flex;
+			flex-direction: column;
+			width: 100%;
+			height: 100%;
+			background-color: grey;
+			left: 0;
+			top: 0;
+		}
+		.result__decor {
+			width: 100%;
+			height: 25px;
+			background-color: #fff;
+		}
+		.result__message {
+			padding: 25px;
+			text-align: center;
+			flex-grow: 1;
+		}
+		.result__admit {
+			margin: 0 auto;
+			width: 30%;
+		}
+		.invisible {
+			display: none;
+		}
+
+
 	</style>
 
 	<h1>Раздел 5</h1>
 	<div class="task-1 container">
 		<h2>Угадай число</h2>
-			
+		<button class="start">Начать игру</button>
+		<div class="game invisible">
+			<input type="text" placeholder="Введите число" class="input ">
+			<button class="admit ">Принять</button>
+		</div>
+		<div class="result invisible">
+			<div class="result__decor"></div>
+			<div class="result__message"></div>
+			<button class="result__admit">ОК</button>
+		</div>
 	</div>
 	<script defer>
 		//_______________________________сброс инпута_________________________________________
@@ -74,6 +112,31 @@
 			elem.innerHTML = content;
 			parent.appendChild(elem);
 		}
+		//_______________________________________________Game___________________________________
+
+		const startBut = document.querySelector('.start');
+		const input = document.querySelector('.input');
+		const game = document.querySelector('.game');
+		const resultW = document.querySelector('.result');
+		const resultMsg = document.querySelector('.result__message');
+		const resultBut = document.querySelector('.result__admit');
+		let startNum;
+		const getRandomInt = (min, max) => {
+			return Math.floor(Math.random() * (max - min + 1)) + min;
+		}
+
+
+		startBut.addEventListener('click', function() {
+			game.classList.remove('invisible');
+			this.classList.add('invisible');
+			startNum = getRandomInt(1, 100);
+			console.log(startNum);
+			resultW.classList.remove('invisible');
+			resultMsg.innerHTML = 'Число загадано';
+		})
+		resultBut.addEventListener('click', () => {
+			resultW.classList.add('invisible');
+		})
 	</script>
 	
 </body>

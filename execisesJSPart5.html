@@ -117,25 +117,70 @@
 		const startBut = document.querySelector('.start');
 		const input = document.querySelector('.input');
 		const game = document.querySelector('.game');
-		const resultW = document.querySelector('.result');
-		const resultMsg = document.querySelector('.result__message');
-		const resultBut = document.querySelector('.result__admit');
+		const messageWind = document.querySelector('.result');
+		const messageCont = document.querySelector('.result__message');
+		const messageBut = document.querySelector('.result__admit');
+		const admitBtn = document.querySelector('.admit');
+		let tries = 0;
 		let startNum;
+		function resetInput(inp) {
+			inp.addEventListener('focus', () => {
+			inp.value = '';
+			})
+		}
+
+		const messages = (num) => {
+			const obj = {
+				start: 'Я загадал число от 1 до 100. Попробуйте угадать:)',
+				error: 'Вы ввели нечисловое значение. Надо число:)',
+				more: `${num} - это слишком много. Попробуйте число поменьше.`,
+				less: `${num} - это слишком мало. Попробуйте число побольше.`,
+				victory: `Вы победили! Вы угадали число с ${tries} попыток:)`
+			}
+			return obj;
+		}
+
 		const getRandomInt = (min, max) => {
 			return Math.floor(Math.random() * (max - min + 1)) + min;
 		}
 
-
+		const switchVis = (vari) => {
+			vari.classList.toggle('invisible');
+		}
+		resetInput(input);
 		startBut.addEventListener('click', function() {
-			game.classList.remove('invisible');
-			this.classList.add('invisible');
+			switchVis(game);
+			switchVis(this);
 			startNum = getRandomInt(1, 100);
-			console.log(startNum);
-			resultW.classList.remove('invisible');
-			resultMsg.innerHTML = 'Число загадано';
+			switchVis(messageWind);
+			messageCont.innerHTML = messages().start ;
 		})
-		resultBut.addEventListener('click', () => {
-			resultW.classList.add('invisible');
+
+		messageBut.addEventListener('click', () => {
+			switchVis(messageWind);
+		})
+
+		admitBtn.addEventListener('click', function() {
+			if (!isNaN(input.value)) {
+				tries++;
+				if (parseInt(input.value) === startNum) {
+					messageCont.innerHTML = messages().victory;
+					switchVis(messageWind);
+					messageBut.addEventListener('click', () => {
+						document.location.reload();
+					})
+
+				} else if (parseInt(input.value) > startNum) {
+					messageCont.innerHTML = messages(input.value).more;
+					switchVis(messageWind);
+				} else if (parseInt(input.value) < startNum) {
+					messageCont.innerHTML = messages(input.value).less;
+					switchVis(messageWind);
+				}
+			} else {
+				messageCont.innerHTML = messages().error;
+				switchVis(messageWind);
+			}
 		})
 	</script>
 	

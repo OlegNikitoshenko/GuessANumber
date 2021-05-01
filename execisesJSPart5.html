@@ -95,22 +95,10 @@
 	</div>
 	<script defer>
 		//_______________________________сброс инпута_________________________________________
-		function resetInput(input) {
-			input.addEventListener('focus', () => {
-				input.value = '';
+		function resetInput(inp) {
+			inp.addEventListener('focus', () => {
+				inp.value = '';
 			})
-		}
-		//___________________________удаление результатов___________________________________
-		function deleteResults(input, results) {
-			input.addEventListener('focus', () => {
-				results.innerHTML = '';
-			})
-		}
-		//_____________________________вывести результат_______________________________________________
-		const writeResult = (el, parent, content) => {
-			const elem = document.createElement(el);
-			elem.innerHTML = content;
-			parent.appendChild(elem);
 		}
 		//_______________________________________________Game___________________________________
 
@@ -123,11 +111,6 @@
 		const admitBtn = document.querySelector('.admit');
 		let tries = 0;
 		let startNum;
-		function resetInput(inp) {
-			inp.addEventListener('focus', () => {
-			inp.value = '';
-			})
-		}
 
 		const messages = (num) => {
 			const obj = {
@@ -147,6 +130,7 @@
 		const switchVis = (vari) => {
 			vari.classList.toggle('invisible');
 		}
+		
 		resetInput(input);
 		startBut.addEventListener('click', function() {
 			switchVis(game);
